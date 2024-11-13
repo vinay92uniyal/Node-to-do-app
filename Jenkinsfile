@@ -10,7 +10,7 @@ pipeline{
         stage("Code Clone"){
             steps{
                 echo "Code Clone Stage"
-                git url: "https://github.com/LondheShubham153/node-todo-cicd.git", branch: "master"
+                git url: "https://github.com/vinay92uniyal/Node-to-do-app.git", branch: "main"
             }
         }
         stage("Code Build & Test"){
