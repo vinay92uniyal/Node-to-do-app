@@ -1,5 +1,10 @@
+
+
+
+
+
 pipeline{
-    agent { label 'dev-server' }
+    agent any
     
     stages{
         stage("Code Clone"){
@@ -17,7 +22,7 @@ pipeline{
         stage("Push To DockerHub"){
             steps{
                 withCredentials([usernamePassword(
-                    credentialsId:"dockerHubCreds",
+                    credentialsId:"Docker-hub",
                     usernameVariable:"dockerHubUser", 
                     passwordVariable:"dockerHubPass")]){
                 sh 'echo $dockerHubPass | docker login -u $dockerHubUser --password-stdin'
@@ -28,8 +33,9 @@ pipeline{
         }
         stage("Deploy"){
             steps{
-                sh "docker compose down && docker compose up -d --build"
+                sh "docker-compose down && docker-compose up -d --build"
             }
         }
     }
 }
+
